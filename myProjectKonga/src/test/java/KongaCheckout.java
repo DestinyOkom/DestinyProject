@@ -93,8 +93,8 @@ public class KongaCheckout {
         driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[2]/div/div[2]/div[3]/div[2]/div/button")).click();
         Thread.sleep(30000);
 
-        driver.findElement(By.xpath("//*[@id=\"channel-template\"]/div[2]/div/div[2]/button")).click();
-        Thread.sleep(50000);
+        driver.findElement(By.xpath("/html/body/section/section/section/div[2]/div[3]/div/div/div[2]/div/div[2]/button")).click();
+        Thread.sleep(60000);
 
     }
 
@@ -113,10 +113,11 @@ public class KongaCheckout {
         String err_msg = driver.findElement(By.xpath("//*[@id=\"card-number_unhappy\"]")).getText();
         Thread.sleep(10000L);
 
+        //store error message
         String expect = "Invalid card number";
         Thread.sleep(9000L);
 
-
+        //verify error message
         Assert.assertEquals(err_msg, expect);
 
 
@@ -133,7 +134,7 @@ public class KongaCheckout {
 
     @AfterTest
     public void closeBrowser() {
-        driver.quit();
+        this.driver.quit();
     }
 }
 
