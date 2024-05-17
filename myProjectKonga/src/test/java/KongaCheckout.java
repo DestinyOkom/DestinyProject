@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -93,48 +94,97 @@ public class KongaCheckout {
         driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[2]/div/div[2]/div[3]/div[2]/div/button")).click();
         Thread.sleep(30000);
 
-        driver.findElement(By.xpath("/html/body/section/section/section/div[2]/div[3]/div/div/div[2]/div/div[2]/button")).click();
+        //driver.findElement(By.xpath("/html/body/section/section/section/div[2]/div[3]/div/div/div[2]/div/div[2]/button")).click();
         Thread.sleep(60000);
 
     }
 
 
     @Test (priority = 4)
-    public void printError() throws InterruptedException {
+        public void selectCardMethod() throws InterruptedException {
+            //17 select a card payment method
+            //17a. change from default to iframe
+            WebElement paymethod = driver.findElement(By.tagName("iframe"));
 
-        //14. Input invalid card details
-        driver.findElement(By.xpath("//*[@id=\"card-number\"]")).sendKeys("1234 1234 1234");
-
-        driver.findElement(By.xpath("//*[@id=\"expiry\"]")).sendKeys("05/16");
-
-        driver.findElement(By.xpath("//*[@id=\"cvv\"]")).sendKeys("125");
-
-        //15. Print Out the error message:Invalid card number
-        String err_msg = driver.findElement(By.xpath("//*[@id=\"card-number_unhappy\"]")).getText();
-        Thread.sleep(10000L);
-
-        //store error message
-        String expect = "Invalid card number";
-        Thread.sleep(9000L);
-
-        //verify error message
-        Assert.assertEquals(err_msg, expect);
+            driver.switchTo().frame("kpg-frame-component");
+            Thread.sleep(7000);
+            System.out.println("Payment Method");
+            //17b. select card payment method
+            WebElement cardpayment = driver.findElement(By.className("Card"));
+            cardpayment.click();
+            System.out.println("Select card method");
+            Thread.sleep(15000);
+        }
 
 
-        System.out.println("Error message is: " + err_msg);
-        Thread.sleep(9000L);
+        @Test (priority = 5)
+        public void inputCardDetails() throws InterruptedException {
+            //18. input individual card details
+            //18a. input card number in its field
+            WebElement carddigit = driver.findElement(By.id("card-number"));
+            carddigit.sendKeys("123456789000");
+            Thread.sleep(3000);
 
-        //16. Close the Frame that displays the input card Modal
+            //18b. input date in its field
+            WebElement datedigit = driver.findElement(By.id("expiry"));
+            datedigit.sendKeys("1124");
+            Thread.sleep(3000);
 
-        driver.findElement(By.xpath("/html/body/section/section/section/div[2]/div[1]/aside")).click();
-        Thread.sleep(30000);
-    }
+            //18c. input CVV in its field
+            WebElement cvvdigit = driver.findElement(By.id("cvv"));
+            cvvdigit.sendKeys("456");
+            Thread.sleep(20000);
+            System.out.println("input card details");
+            driver.findElement(By.xpath("//*[@id=\"card-pin-new\"]")).click();
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"keypads\"]/button[1]")).click();
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"keypads\"]/button[2]")).click();
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"keypads\"]/button[3]")).click();
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"keypads\"]/button[4]")).click();
+            Thread.sleep(5000);
+            driver.findElement(By.xpath("//*[@id=\"validateCardForm\"]")).click();
+            Thread.sleep(5000);
+            System.out.println("input card pin");
+            Thread.sleep(10000);
+        }
 
 
+        @Test (priority = 6)
+        public void errorMessage() throws InterruptedException {
 
+            //19 print out the error message
+            WebElement error = driver.findElement(By.id("card-number_unhappy"));
+            System.out.println(error.getText());
+            Thread.sleep(10000);
+        }
+
+
+        @Test (priority = 7)
+        public void closeFrame() throws InterruptedException {
+            //20. close the Iframe that displays input card details
+            WebElement exitframe = driver.findElement(By.className("data-card__close"));
+            exitframe.click();
+            System.out.println("Exit payment method iframe");
+            Thread.sleep(10000);
+
+        }
+
+
+        @Test (priority = 8)
+        public void exitIFrame() throws InterruptedException {
+            //21. Exit iFrame web
+            driver.switchTo().defaultContent();
+            Thread.sleep(5000);
+            System.out.println("Restore default page");
+        }
+
+        
     @AfterTest
     public void closeBrowser() {
-        this.driver.quit();
+        driver.quit();
     }
 }
 
