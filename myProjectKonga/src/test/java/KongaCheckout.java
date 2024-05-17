@@ -58,7 +58,7 @@ public class KongaCheckout {
         Thread.sleep(30000);
 
         //10. Add an item to the cart
-        driver.findElement(By.xpath("//*[@id=\"mainContent\"]/section[3]/section/section/section/section/ul/li[7]/div/div/div[2]/form/div[3]/button")).click();
+        driver.findElement(By.xpath("//*[@id=\"mainContent\"]/section[3]/section/section/section/section/ul/li[10]/div/div/div[2]/form/div[3]/button")).click();
         Thread.sleep(30000);
 
 
@@ -74,14 +74,17 @@ public class KongaCheckout {
         Thread.sleep(30000);
 
         //12. Add delivery address
+        driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[1]/div/div/div[1]/div[2]/div/button")).click();
+        Thread.sleep(30000);
+
         driver.findElement(By.xpath("/html/body/div[1]/div/section/div[2]/section/main/div/form/div/div[1]/section[1]/div/div/div[2]/div[1]/div[2]/div[1]/div/button")).click();
         Thread.sleep(30000);
 
         driver.findElement(By.xpath("//*[@id=\"app-content-wrapper\"]/div[2]/section/section/aside/div[2]/div/div/div[2]/div[1]/form/button")).click();
-        //Thread.sleep(30000);
+        Thread.sleep(30000);
 
         driver.findElement(By.xpath("//*[@id=\"app-content-wrapper\"]/div[2]/section/section/aside/div[3]/div/div/div/a")).click();
-        //Thread.sleep(30000);
+        Thread.sleep(30000);
 
         //13. Select a card payment option
         driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[2]/div/div[2]/div[1]/div[1]/span/input")).click();
@@ -90,7 +93,7 @@ public class KongaCheckout {
         driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[2]/div/div[2]/div[3]/div[2]/div/button")).click();
         Thread.sleep(30000);
 
-        driver.findElement(By.xpath("//*[@id=\"channel-template\"]/div[2]/div/div[2]/button")).click();
+        driver.findElement(By.xpath("//*[@id=\"channel-template\"]/div[2]/div/div[2]/button/div/span[2]")).click();
         Thread.sleep(30000);
 
     }
