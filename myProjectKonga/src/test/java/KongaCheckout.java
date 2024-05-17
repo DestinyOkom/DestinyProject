@@ -93,8 +93,8 @@ public class KongaCheckout {
         driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/form/div/div[1]/section[2]/div/div[2]/div[3]/div[2]/div/button")).click();
         Thread.sleep(30000);
 
-        driver.findElement(By.xpath("//*[@id=\"channel-template\"]/div[2]/div/div[2]/button/div/span[2]")).click();
-        Thread.sleep(30000);
+        driver.findElement(By.xpath("//*[@id=\"channel-template\"]/div[2]/div/div[2]/button")).click();
+        Thread.sleep(50000);
 
     }
 
